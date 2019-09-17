@@ -5,7 +5,7 @@ metadata:
 data:
   config: |
     name: default
-    version: 1.15.2
+    version: 2.15.3
     providers:
       appengine:
         enabled: false
