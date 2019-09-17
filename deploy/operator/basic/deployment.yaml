@@ -17,7 +17,9 @@ spec:
         - name: spinnaker-operator
           image: armory/spinnaker-operator:latest
           command:
-          - spinnaker-operator --without-admission-controller
+            - spinnaker-operator
+          args:
+            - --disable-admission-controller
           imagePullPolicy: Always
           env:
             - name: WATCH_NAMESPACE
