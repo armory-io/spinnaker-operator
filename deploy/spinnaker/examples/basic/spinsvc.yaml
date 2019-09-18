@@ -1,4 +1,4 @@
-apiVersion: spinnaker.io/v1alpha1
+apiVersion: spinnaker.armory.io/v1alpha1
 kind: SpinnakerService
 metadata:
   name: spinnaker
