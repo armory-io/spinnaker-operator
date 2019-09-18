@@ -50,7 +50,7 @@ rules:
   verbs:
   - update
 - apiGroups:
-  - spinnaker.io
+  - spinnaker.armory.io
   resources:
   - '*'
   - spinnakerservices
