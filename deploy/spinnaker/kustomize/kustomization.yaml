@@ -1,3 +1,20 @@
 resources:
-  - spin-config.yaml
-  - spin-service.yaml
+  - SpinnakerService.yaml
+
+patches:
+- path: config.yaml
+  target:
+    version: v1alpha1
+    kind: SpinnakerService
+- path: profiles.yaml
+  target:
+    version: v1alpha1
+    kind: SpinnakerService
+- path: raw-files.yaml
+  target:
+    version: v1alpha1
+    kind: SpinnakerService
+- path: service-settings.yaml
+  target:
+    version: v1alpha1
+    kind: SpinnakerService

@@ -1,0 +1,18 @@
+kind: SpinnakerService
+metadata:
+  name: blah # value doesn't matter as long as field exists
+spec:
+  spinnakerConfig:
+    service-settings:
+      clouddriver: {}
+      deck: {}
+      dinghy: {}
+      echo: {}
+      fiat: {}
+      front50: {}
+      gate: {}
+      igor: {}
+      kayenta: {}
+      orca: {}
+      rosco: {}
+      terraformer: {}

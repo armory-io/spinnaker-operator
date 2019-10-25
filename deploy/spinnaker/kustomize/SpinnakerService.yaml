@@ -1,0 +1,33 @@
+apiVersion: spinnaker.armory.io/v1alpha1
+kind: SpinnakerService
+metadata:
+  name: spinnaker
+spec:
+  spinnakerConfig:
+    config:  {}
+    profiles: {}
+    files: {}
+    service-settings: {}
+
+  expose:
+    type: service
+    service:
+      type: LoadBalancer
+
+      # annoations set on each kub service
+      annotations:
+
+      #individual annoation per kub service
+      overrides:
+        gate:
+          annotations:
+            "service.beta.kubernetes.io/aws-load-balancer-backend-protocol": "http"
+            # "service.beta.kubernetes.io/aws-load-balancer-ssl-cert": arn:aws:acm:us-west-2:999999999999:certificate/aaaaaaa-bbbbbb-cccccc-123
+        deck:
+          annotations:
+            "service.beta.kubernetes.io/aws-load-balancer-backend-protocol": "http"
+            # "service.beta.kubernetes.io/aws-load-balancer-ssl-cert": arn:aws:acm:us-west-2:999999999999:certificate/aaaaaaa-bbbbbb-cccccc-123
+        # gate-x509:
+        #   annotations:
+        #     "service.beta.kubernetes.io/aws-load-balancer-backend-protocol": "tcp"
+        #   publicPort: 443

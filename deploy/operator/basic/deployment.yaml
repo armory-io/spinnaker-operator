@@ -15,7 +15,7 @@ spec:
       serviceAccountName: spinnaker-operator
       containers:
         - name: spinnaker-operator
-          image: armory/armory-operator:0.1.0
+          image: armory/armory-operator:dev
           command:
             - spinnaker-operator
           args:
@@ -36,5 +36,5 @@ spec:
           image: armory/halyard-armory:operator-latest
           imagePullPolicy: Always
           ports:
-          - containerPort: 8064
-            protocol: TCP
+            - containerPort: 8064
+              protocol: TCP

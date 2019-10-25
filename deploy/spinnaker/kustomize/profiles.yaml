@@ -1,0 +1,21 @@
+kind: SpinnakerService
+metadata:
+  name: blah # value doesn't matter as long as field exists
+spec:
+  spinnakerConfig:
+    profiles:
+      clouddriver: {}
+      deck:
+        settings-local.js: |
+          window.spinnakerSettings.feature.kustomizeEnabled = true;
+          window.spinnakerSettings.feature.artifactsRewrite = true;
+      dinghy: {}
+      echo: {}
+      fiat: {}
+      front50: {}
+      gate: {}
+      igor: {}
+      kayenta: {}
+      orca: {}
+      rosco: {}
+      terraformer: {}

@@ -1,0 +1,12 @@
+kind: SpinnakerService
+metadata:
+  name: blah # value doesn't matter as long as field exists
+spec:
+  spinnakerConfig:
+    config:
+      version: 1.15.1
+      persistentStorage:
+        persistentStoreType: s3
+        s3:
+          bucket: mybucket
+          rootFolder: front50
