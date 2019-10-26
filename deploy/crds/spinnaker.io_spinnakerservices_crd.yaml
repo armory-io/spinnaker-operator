@@ -1,7 +1,7 @@
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
 metadata:
-  name: spinnakerservices.spinnaker.io
+  name: spinnakerservices.spinnaker.armory.io
 spec:
   additionalPrinterColumns:
   - JSONPath: .status.version
@@ -29,7 +29,7 @@ spec:
     name: apiUrl
     priority: 1
     type: string
-  group: spinnaker.io
+  group: spinnaker.armory.io
   names:
     kind: SpinnakerService
     listKind: SpinnakerServiceList
