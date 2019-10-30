@@ -1,0 +1,71 @@
+kind: SpinnakerService
+metadata:
+  name: blah # value doesn't matter as long as field exists
+spec:
+  spinnakerConfig:
+    files:
+      profiles__clouddriver__udf__udf0: |
+        #!/bin/bash
+        cat >/etc/default/server-env <<EOL
+        CLOUD_ACCOUNT="%%account%%"
+        EOL
+
+      profiles__rosco__packer__example-packer-config.json: |
+        {
+            "variables": {
+              "aws_access_key": "",
+              "aws_secret_key": "",
+              "aws_subnet_id": "{{env `AWS_SUBNET_ID`}}",
+              "aws_vpc_id": "{{env `AWS_VPC_ID`}}",
+              "aws_region": null,
+              "aws_ssh_username": null,
+              "aws_instance_type": null,
+              "aws_source_ami": null,
+              "aws_target_ami": null,
+              "aws_associate_public_ip_address": "true",
+              "aws_enhanced_networking": "false",
+              "appversion": "",
+              "build_host": "",
+              "repository": "",
+              "package_type": "",
+              "packages": "",
+              "upgrade": "",
+              "configDir": null
+            },
+            "builders": [{
+              "type": "amazon-ebs",
+              "access_key": "{{user `aws_access_key`}}",
+              "secret_key": "{{user `aws_secret_key`}}",
+              "subnet_id": "{{user `aws_subnet_id`}}",
+              "vpc_id": "{{user `aws_vpc_id`}}",
+              "region": "{{user `aws_region`}}",
+              "ssh_username": "{{user `aws_ssh_username`}}",
+              "ssh_pty": true,
+              "instance_type": "{{user `aws_instance_type`}}",
+              "source_ami": "{{user `aws_source_ami`}}",
+              "ami_name": "{{user `aws_target_ami`}}",
+              "associate_public_ip_address": "{{user `aws_associate_public_ip_address`}}",
+              "ena_support": "{{user `aws_enhanced_networking`}}",
+              "tags": {
+                "appversion": "{{user `appversion`}}",
+                "build_host": "{{user `build_host`}}",
+                "build_info_url": "{{user `build_info_url`}}"
+              },
+              "run_tags": {"Packages": "{{user `packages`}}"}
+            }],
+            "provisioners": [{
+              "type": "shell",
+              "script": "{{user `configDir`}}/my_custom_script.sh",
+              "environment_vars": [
+                "repository={{user `repository`}}",
+                "package_type={{user `package_type`}}",
+                "packages={{user `packages`}}",
+                "upgrade={{user `upgrade`}}"
+              ],
+              "pause_before": "30s"
+            }]
+        }
+
+      profiles__rosco__packer__my_custom_script.sh: |
+        #!/bin/bash -e
+        echo "hello world!"
