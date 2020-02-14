@@ -1,0 +1,44 @@
+on:
+  push:
+    branches:
+      - 'release-*'
+
+jobs:
+  patch-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v2
+      - name: Fetch tags
+        run: |
+          git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+      - name: Determine version
+        id: release_version
+        run: |
+          version=$(cat deploy/operator/basic/deployment.yaml | grep "armory/armory-operator:" | sed 's|.*armory/armory-operator:||')
+          [[ "x$version" = "x" ]] && echo "Unable to determine release version from docker image tag in deployment.yaml" && exit 1
+          echo "##[set-output name=version;]$version"
+      - name: Validate tag
+        run: |
+          git tag v${{ steps.release_version.outputs.version }}
+      - name: Archive manifests
+        run: tar -czvf manifests.tgz deploy/
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ steps.release_version.outputs.version }}
+          release_name: v${{ steps.release_version.outputs.version }}
+          draft: false
+          prerelease: true
+      - name: Upload manifests
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./manifests.tgz
+          asset_name: manifests.tgz
+          asset_content_type: application/zip
