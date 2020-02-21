@@ -8,7 +8,7 @@ sources:
 maintainers:
   - name: Armory
     email: engineering@armory.io
-home: https://github.com/armory-io/armory-operator
+home: https://github.com/armory/spinnaker-operator
 keywords:
   - operator
   - spinnaker
