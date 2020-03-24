@@ -64,6 +64,17 @@ rules:
   - watch
   - patch
 - apiGroups:
+  - spinnaker.io
+  resources:
+  - spinnakeraccounts
+  verbs:
+  - create
+  - get
+  - list
+  - update
+  - watch
+  - patch
+- apiGroups:
   - admissionregistration.k8s.io
   resources:
   - validatingwebhookconfigurations
