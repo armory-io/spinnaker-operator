@@ -56,3 +56,14 @@ rules:
   - spinnakerservices
   verbs:
   - '*'
+- apiGroups:
+  - spinnaker.io
+  resources:
+  - spinnakeraccounts
+  verbs:
+  - create
+  - get
+  - list
+  - update
+  - watch
+  - patch
