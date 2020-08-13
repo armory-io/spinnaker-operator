@@ -34,7 +34,7 @@ spinnakerOperator:
   operator:
     image:
       repository: index.docker.io/armory/armory-operator
-      tag: 1.1.0
+      tag: 1.1.1
       pullPolicy: IfNotPresent
 
     resources: {}
