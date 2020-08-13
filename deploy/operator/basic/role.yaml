@@ -67,3 +67,12 @@ rules:
   - update
   - watch
   - patch
+- apiGroups:
+    - networking.k8s.io
+    - extensions
+  resources:
+    - ingresses
+  verbs:
+    - get
+    - list
+    - watch
