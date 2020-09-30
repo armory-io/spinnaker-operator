@@ -46,10 +46,10 @@ spec:
               value: "spinnaker-operator"
           resources:
             {{- toYaml .Values.spinnakerOperator.operator.resources | nindent 12 }}
-          {{- if .Values.spinnakerOperator.operator.volumeMounts }}
+{{- if .Values.spinnakerOperator.operator.volumeMounts }}
           volumeMounts:
-          {{ toYaml .Values.spinnakerOperator.operator.volumeMounts | indent 8 }}
-          {{- end }}
+{{ toYaml .Values.spinnakerOperator.operator.volumeMounts | indent 10 }}
+{{- end }}
         - name: {{ template "spinnaker-operator.halyard.fullname" . }}
           image: "{{ .Values.spinnakerOperator.halyard.image.repository }}:{{ .Values.spinnakerOperator.halyard.image.tag }}"
           imagePullPolicy: "{{ .Values.spinnakerOperator.halyard.image.pullPolicy }}"
@@ -70,10 +70,10 @@ spec:
             periodSeconds: 20
           resources:
             {{- toYaml .Values.spinnakerOperator.halyard.resources | nindent 12 }}
-          {{- if .Values.spinnakerOperator.halyard.volumeMounts }}
+{{- if .Values.spinnakerOperator.halyard.volumeMounts }}
           volumeMounts:
-          {{ toYaml .Values.spinnakerOperator.halyard.volumeMounts | indent 8 }}
-          {{- end }}
+{{ toYaml .Values.spinnakerOperator.halyard.volumeMounts | indent 10 }}
+{{- end }}
 {{- if .Values.spinnakerOperator.volumes }}
       volumes:
 {{ toYaml .Values.spinnakerOperator.volumes | indent 8 }}
