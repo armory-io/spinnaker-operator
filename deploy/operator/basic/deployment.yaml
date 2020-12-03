@@ -15,7 +15,7 @@ spec:
       serviceAccountName: spinnaker-operator
       containers:
         - name: spinnaker-operator
-          image: armory/armory-operator:1.2.1
+          image: armory/armory-operator:1.2.2
           command:
             - spinnaker-operator
           args:
@@ -33,7 +33,7 @@ spec:
             - name: OPERATOR_NAME
               value: "spinnaker-operator"
         - name: halyard
-          image: armory/halyard-armory:operator-adc894f04b10f5e6d289baa71509bbda3e45e051
+          image: armory/halyard-armory:1.10.1-c90c85a-operator
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8064
