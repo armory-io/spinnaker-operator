@@ -15,7 +15,7 @@ spec:
       serviceAccountName: spinnaker-operator
       containers:
         - name: spinnaker-operator
-          image: armory/armory-operator:1.5.0
+          image: armory/armory-operator:1.5.0-ubi
           command:
             - spinnaker-operator
           imagePullPolicy: IfNotPresent
@@ -26,10 +26,8 @@ spec:
                   fieldPath: metadata.name
             - name: OPERATOR_NAME
               value: "spinnaker-operator"
-            - name: DEBUG_ENDPOINT
-              value: "https://debug.armory.io"
         - name: halyard
-          image: armory/halyard-armory:1.12.0-0422a50-operator
+          image: armory/halyard-armory:1.12.0-0422a50-operator-ubi
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8064
