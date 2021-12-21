@@ -33,6 +33,8 @@ rules:
   - apps
   - extensions
   resources:
+  - secrets/finalizers
+  - deployments/finalizers
   - deployments
   - daemonsets
   - replicasets
