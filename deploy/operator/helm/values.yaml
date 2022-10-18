@@ -34,7 +34,7 @@ spinnakerOperator:
   operator:
     image:
       repository: index.docker.io/armory/armory-operator
-      tag: 1.7.0
+      tag: 1.7.3
       pullPolicy: IfNotPresent
 
     resources: {}
@@ -44,7 +44,7 @@ spinnakerOperator:
   halyard:
     image:
       repository: index.docker.io/armory/halyard-armory
-      tag: 1.12.0-7d46af7-operator
+      tag: 1.12.0-76b471c-operator
       pullPolicy: IfNotPresent
 
     resources: {}
