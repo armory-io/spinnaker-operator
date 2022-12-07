@@ -37,6 +37,10 @@ spec:
           imagePullPolicy: "{{ .Values.spinnakerOperator.operator.image.pullPolicy }}"
           command:
           - spinnaker-operator
+          {{- if  eq (.Values.spinnakerOperator.operator.disableAdmissionController | default false) true}}
+          args:
+          - --disable-admission-controller
+          {{- end }}
           env:
             - name: POD_NAME
               valueFrom:
