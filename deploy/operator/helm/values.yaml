@@ -35,7 +35,7 @@ spinnakerOperator:
     disableAdmissionController: false
     image:
       repository: index.docker.io/armory/armory-operator
-      tag: 1.8.1
+      tag: 1.8.2
       pullPolicy: IfNotPresent
 
     resources: {}
@@ -45,7 +45,7 @@ spinnakerOperator:
   halyard:
     image:
       repository: index.docker.io/armory/halyard-armory
-      tag: 1.12.0-9b8269b-operator
+      tag: 1.12.0-906c808-operator
       pullPolicy: IfNotPresent
 
     resources: {}
