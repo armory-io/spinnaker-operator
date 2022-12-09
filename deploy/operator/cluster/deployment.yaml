@@ -15,10 +15,10 @@ spec:
       serviceAccountName: spinnaker-operator
       containers:
         - name: spinnaker-operator
-          image: armory/armory-operator:dev
+          image: armory/armory-operator:1.8.2
           command:
             - spinnaker-operator
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           env:
             - name: POD_NAME
               valueFrom:
@@ -26,9 +26,23 @@ spec:
                   fieldPath: metadata.name
             - name: OPERATOR_NAME
               value: "spinnaker-operator"
+            - name: DEBUG_ENDPOINT
+              value: "https://debug.armory.io"
         - name: halyard
-          image: armory/halyard-armory:operator-0.3.x
-          imagePullPolicy: Always
+          image: armory/halyard-armory:1.12.0-906c808-operator
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8064
               protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8064
+            failureThreshold: 20
+            periodSeconds: 5
+            initialDelaySeconds: 20
+          livenessProbe:
+            tcpSocket:
+              port: 8064
+            initialDelaySeconds: 30
+            periodSeconds: 20
