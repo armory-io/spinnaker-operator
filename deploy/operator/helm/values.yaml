@@ -32,9 +32,10 @@ spinnakerOperator:
             enabled: false
 
   operator:
+    disableAdmissionController: false
     image:
       repository: index.docker.io/armory/armory-operator
-      tag: 1.8.0
+      tag: 1.8.1
       pullPolicy: IfNotPresent
 
     resources: {}
