@@ -15,12 +15,12 @@ spec:
       serviceAccountName: spinnaker-operator
       containers:
         - name: spinnaker-operator
-          image: armory/armory-operator:1.7.5
+          image: armory/armory-operator:dev-ubi # Moving label, replaced at build time with a fixed version in "build" dir
           command:
             - spinnaker-operator
           args:
             - --disable-admission-controller
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           env:
             - name: WATCH_NAMESPACE
               valueFrom:
@@ -33,8 +33,8 @@ spec:
             - name: OPERATOR_NAME
               value: "spinnaker-operator"
         - name: halyard
-          image: armory/halyard-armory:1.12.0-76b471c-operator
-          imagePullPolicy: IfNotPresent
+          image: armory/halyard-armory:operator-dev-ubi # Moving label, replaced at build time with a fixed version in "build" dir
+          imagePullPolicy: Always
           ports:
             - containerPort: 8064
               protocol: TCP
