@@ -1,11 +1,7 @@
-{{- if and (and .Values.spinnakerOperator.enabled .Values.spinnakerOperator.rbac.create) (not .Values.spinnakerOperator.rbac.basicMode) }}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: {{ template "spinnaker-operator.name" . }}
-  labels:
-    app: {{ template "spinnaker-operator.name" . }}
-{{- include "spinnaker-operator.labels" . | indent 4 }}
+  name: spinnaker-operator-role
 rules:
 - apiGroups:
   - ""
@@ -37,6 +33,8 @@ rules:
   - apps
   - extensions
   resources:
+  - secrets/finalizers
+  - deployments/finalizers
   - deployments
   - daemonsets
   - replicasets
@@ -84,4 +82,12 @@ rules:
   - validatingwebhookconfigurations
   verbs:
   - '*'
-{{- end }}
+- apiGroups:
+    - networking.k8s.io
+    - extensions
+  resources:
+    - ingresses
+  verbs:
+    - get
+    - list
+    - watch

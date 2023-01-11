@@ -15,6 +15,7 @@ spinnakerOperator:
 
   rbac:
     create: true
+    #basicMode: false
 
   serviceAccount:
     create: true
@@ -32,9 +33,10 @@ spinnakerOperator:
             enabled: false
 
   operator:
+    disableAdmissionController: false
     image:
       repository: index.docker.io/armory/armory-operator
-      tag: 1.7.3
+      tag: 1.7.5
       pullPolicy: IfNotPresent
 
     resources: {}
