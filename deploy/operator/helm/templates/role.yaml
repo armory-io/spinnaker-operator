@@ -1,0 +1,83 @@
+{{- if and (and .Values.spinnakerOperator.enabled .Values.spinnakerOperator.rbac.create) (.Values.spinnakerOperator.rbac.basicMode) }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: {{ template "spinnaker-operator.name" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ template "spinnaker-operator.name" . }}
+{{- include "spinnaker-operator.labels" . | indent 4 }}
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - pods
+      - services
+      - endpoints
+      - persistentvolumeclaims
+      - events
+      - configmaps
+      - secrets
+      - namespaces
+    verbs:
+      - '*'
+  - apiGroups:
+      - batch
+      - extensions
+    resources:
+      - jobs
+    verbs:
+      - '*'
+  - apiGroups:
+      - apps
+      - extensions
+    resources:
+      - deployments
+      - daemonsets
+      - replicasets
+      - statefulsets
+    verbs:
+      - '*'
+  - apiGroups:
+      - monitoring.coreos.com
+    resources:
+      - servicemonitors
+    verbs:
+      - get
+      - create
+  - apiGroups:
+      - apps
+    resourceNames:
+      - spinnaker-operator
+    resources:
+      - deployments/finalizers
+    verbs:
+      - update
+  - apiGroups:
+      - spinnaker.armory.io
+    resources:
+      - '*'
+      - spinnakerservices
+    verbs:
+      - '*'
+  - apiGroups:
+      - spinnaker.io
+    resources:
+      - spinnakeraccounts
+    verbs:
+      - create
+      - get
+      - list
+      - update
+      - watch
+      - patch
+  - apiGroups:
+      - networking.k8s.io
+      - extensions
+    resources:
+      - ingresses
+    verbs:
+      - get
+      - list
+      - watch
+{{- end }}
