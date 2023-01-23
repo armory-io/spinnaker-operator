@@ -1,4 +1,4 @@
-{{- if and .Values.spinnakerOperator.enabled .Values.spinnakerOperator.rbac.create }}
+{{- if and (and .Values.spinnakerOperator.enabled .Values.spinnakerOperator.rbac.create) (not .Values.spinnakerOperator.rbac.basicMode) }}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
