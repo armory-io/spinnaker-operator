@@ -15,10 +15,10 @@ spec:
       serviceAccountName: spinnaker-operator
       containers:
         - name: spinnaker-operator
-          image: armory/armory-operator:1.8.10
+          image: armory/armory-operator:dev-ubi # Moving label, replaced at build time with a fixed version in "build" dir
           command:
             - spinnaker-operator
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           env:
             - name: POD_NAME
               valueFrom:
@@ -26,11 +26,9 @@ spec:
                   fieldPath: metadata.name
             - name: OPERATOR_NAME
               value: "spinnaker-operator"
-            - name: DEBUG_ENDPOINT
-              value: "https://debug.armory.io"
         - name: halyard
-          image: armory/halyard-armory:1.12.0-73d4524-operator
-          imagePullPolicy: IfNotPresent
+          image: armory/halyard-armory:operator-dev-ubi # Moving label, replaced at build time with a fixed version in "build" dir
+          imagePullPolicy: Always
           ports:
             - containerPort: 8064
               protocol: TCP
